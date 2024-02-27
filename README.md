@@ -133,7 +133,7 @@
 </details>
 
 - <details>
-  <summary>240227. 자바 코드로 직접 스프링 빈 등록하기</summary>
+  <summary>자바 코드로 직접 스프링 빈 등록하기</summary>
   
   ### SpringConfig 파일을 통한 직접 빈 객체 등록 
   
