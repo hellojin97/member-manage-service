@@ -105,3 +105,29 @@
     }
     ```
 </details>
+
+- <details>
+  <summary>240227. 컴포넌트 스캔과 자동 의존관계 설정</summary>
+
+  ### 스프링 빈과 의존관계
+  - 회원 컨트롤러가 회원서비스와 회원 리포지토리를 사용할 수 있게 의존관계를 준비
+  [MemberController.java](./src/main/java/hello/membermanageservice/controller/MemberController.java) 파일을 생성한다.
+  ```java
+  @Controller
+  public class MemberController {
+  
+      private final MemberService memberService;
+  
+      @Autowired
+      public MemberController(MemberService memberService) {
+          this.memberService = memberService;
+      }
+  }
+  ```
+  - 처음에 `@Autowired` 애노테이션을 작성하기 이전에는 생성자 매개변수의 `MemberService`에 컴파일 에러가 표시가 된다.
+  - 이에 대한 이유는 아래와 같다.  
+    ![](./assets/spring-bean-di.png)
+    - `@Controller`, `@Repository`, `@Service` 등의 스프링 애노테이션은 **Spring Application**이 실행되면서 `Spring Container`에 `Spring Bean`으로서 객체로 생성되어 띄워진다.
+    - `@Autowired` 애노테이션을 통해 각 의존성이 필요한 객체에 연관관계를 주입힌다.
+    - 이렇게 진행하여 자동으로 의존관계를 설정하는 것을 **컴포넌트 스캔**이라 한다.
+</details>
