@@ -40,7 +40,7 @@
 
 - 
   <details>
-    <summary>240227. 테스트 케이스 작성</summary>
+    <summary> 테스트 케이스 작성</summary>
 
   ![img.png](./assets/first_test_case.png)
   
@@ -107,7 +107,7 @@
 </details>
 
 - <details>
-  <summary>240227. 컴포넌트 스캔과 자동 의존관계 설정</summary>
+  <summary> 컴포넌트 스캔과 자동 의존관계 설정</summary>
 
   ### 스프링 빈과 의존관계
   - 회원 컨트롤러가 회원서비스와 회원 리포지토리를 사용할 수 있게 의존관계를 준비
@@ -130,4 +130,30 @@
     - `@Controller`, `@Repository`, `@Service` 등의 스프링 애노테이션은 **Spring Application**이 실행되면서 `Spring Container`에 `Spring Bean`으로서 객체로 생성되어 띄워진다.
     - `@Autowired` 애노테이션을 통해 각 의존성이 필요한 객체에 연관관계를 주입힌다.
     - 이렇게 진행하여 자동으로 의존관계를 설정하는 것을 **컴포넌트 스캔**이라 한다.
+</details>
+
+- <details>
+  <summary>240227. 자바 코드로 직접 스프링 빈 등록하기</summary>
+  
+  ### SpringConfig 파일을 통한 직접 빈 객체 등록 
+  
+  - 사전 설정
+    - 우선 [MemberService](./src/main/java/hello/membermanageservice/service/MemberService.java)와 [MemberRepository](./src/main/java/hello/membermanageservice/repository/MemoryMemberRepository.java)에 `@Service`, `@Repository`,
+    `@Autowired`를 제거
+    - [SpringConfig](./src/main/java/hello/membermanageservice/SpringConfig.java)를 생성하고 아래와 같이 작성
+    ```java
+    @Configuration
+    public class SpringConfig {
+    
+        @Bean
+        public MemberService memberService() {
+            return new MemberService(memberRepository());
+        }
+    
+        @Bean
+        public MemberRepository memberRepository() {
+            return new MemoryMemberRepository();
+        }
+    }
+    ```
 </details>
